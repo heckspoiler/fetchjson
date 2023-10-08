@@ -5,17 +5,21 @@ const url = 'https://jsonplaceholder.typicode.com/todos/1';
 interface Todo {
   id: number;
   title: string;
-  finished: boolean;
+  completed: boolean;
 }
 
 axios.get(url).then((response) => {
-  const todo = response.data;
-  const ID = todo.id;
+  const todo = response.data as Todo;
+  const id = todo.id;
   const title = todo.title;
-  const completed = todo.finished;
+  const completed = todo.completed;
 
-  console.log(`
-    The ToDo with ID ${ID} 
-    has a title of ${title}
-    and is it finished? ${completed}`);
+  logTodo(id, title, completed);
 });
+
+const logTodo = (id: number, title: string, completed: boolean) => {
+  console.log(`
+  The ToDo with ID ${id} 
+  has a title of ${title}
+  and is it finished? ${completed}`);
+};
